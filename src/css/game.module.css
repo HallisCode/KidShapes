@@ -1,10 +1,41 @@
+@import "sanitize.css";
+
+.ScreenMiddle 
+{
+    height: 100vh;
+    padding: 3% 12.5%;
+}
+
+.ShapeGame
+{
+    height: 100%;
+    width: 100%;
+    border: 2px #c8c8c8 solid;
+    display: flex;
+    flex-direction: column;
+}
 
 .MainField
 {
-    background-color: chocolate;
+    flex: 1;
 }
 
 .SelectorField
 {
-    background-color: cadetblue;
+    flex: 0.15;
+    border-top: 2px #c8c8c8 solid;
+}
+
+.DragShape
+{
+    height: 30px;
+    width: 30px;
+    background-color: gold;
+}
+
+.DropShape
+{
+    height: 50px;
+    width: 50px;
+    background-color: forestgreen;
 }
