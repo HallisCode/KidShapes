@@ -1,0 +1,7 @@
+@import "sanitize.css";
+
+.ScreenMiddle 
+{
+    height: 100vh;
+    padding: 3% 12.5%;
+}
