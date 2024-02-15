@@ -1,13 +1,18 @@
 import React from "react";
 
-import ShapeGame from "./shape-game/ShapeGame.tsx";
+import ShapeGame from "./ShapeGame/Components/ShapeGame.tsx";
+
+
+import styles from "./css/index.module.css";
 
 
 function App() 
 {
   return (
     <div className="App">
-      <ShapeGame/>
+        <div className={styles.ScreenMiddle}>
+          <ShapeGame/>
+        </div>
     </div>
   );
 }
