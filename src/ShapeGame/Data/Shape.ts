@@ -1,3 +1,4 @@
+import React, { JSX } from "react";
 import ShapeType from "../Enums/ShapeType.ts";
 
 interface IShape
@@ -7,7 +8,13 @@ interface IShape
     svg? : string
 }
 
-class Shape implements IShape
+interface IDropShape extends IShape
+{
+    innerElement? : React.JSX.Element
+}
+
+
+class DragShape implements IShape
 {
     className: string;
     type: ShapeType;
@@ -24,4 +31,24 @@ class Shape implements IShape
     }
 }
 
-export {IShape, Shape};
+class DropShape implements IDropShape
+{
+    className: string;
+    type: ShapeType;
+    svg?: string;
+    innerElement?: React.JSX.Element;
+
+    constructor(className : string, type : ShapeType, svg? : string, innerElement?: React.JSX.Element)
+    {
+        this.className = className;
+
+        this.type = type;
+
+        this.svg = svg;
+
+        this.innerElement = innerElement;
+    }
+
+}
+
+export {IShape, IDropShape, DragShape, DropShape};

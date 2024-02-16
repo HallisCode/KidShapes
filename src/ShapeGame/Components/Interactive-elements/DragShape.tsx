@@ -16,10 +16,8 @@ function DragShape({shape, id} : {shape : IShape, id : string | number})
         transform: CSS.Translate.toString(transform)
     } : undefined;
 
-
     return (
         <div ref={setNodeRef} className={shape.className} style={movingStyle} {...listeners} {...attributes}>
-            {shape.type}
             <img src={shape.svg}/>
         </div>
     );

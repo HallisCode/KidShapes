@@ -1,22 +1,21 @@
 import React from "react";
-
 import { useDroppable } from "@dnd-kit/core";
-import { Props } from "@dnd-kit/core/dist/components/DndContext/DndContext";
-
-import {IShape} from "../../Data/Shape.ts";
 
 
-function DropShape({shape, id, putElement } : {shape : IShape, putElement? : React.JSX.Element, id : string | number})
+import {IDropShape} from "../../Data/Shape.ts";
+import DragShape from "./DragShape.tsx";
+
+
+function DropShape({dropShape, id } : {dropShape : IDropShape, id : string | number})
 {
     const {isOver, setNodeRef } = useDroppable({
         id : id,
-        data : shape
+        data : dropShape
     });
 
     return (
-        <div ref={setNodeRef} className={shape.className}>
-            {shape.type}
-            <img src={shape.svg}/>
+        <div ref={setNodeRef} className={dropShape.className}>
+            {dropShape.innerElement != null ? dropShape.innerElement: <img src={dropShape.svg}/>}
         </div>
     );
 }
