@@ -5,8 +5,6 @@ import DropShape from "../Interactive-elements/DropShape.tsx";
 import { Size } from "../../Data/Size.ts";
 import { Coordx, ICoordx } from "../../Data/Coordx.ts";
 
-import styles from "../../css/game.module.css";
-
 
 function RandomShapeField({ dropShapes}: { dropShapes: Array<IDropShape>}) {
 
@@ -17,56 +15,13 @@ function RandomShapeField({ dropShapes}: { dropShapes: Array<IDropShape>}) {
     const [dropShapeComponents, setDropShapeComponents] = useState(new Array<React.JSX.Element>);
 
     useEffect(() => {
-        if (workArea.current) {
 
-            const { height, width } = workArea.current.getBoundingClientRect()
+        if (workArea.current == null) return;
 
-            const size = new Size(76 * 1.12, 86 * 1.12);
+        spawnRandomDropShapes();
 
-            const dropShapeCoordx = new Array<ICoordx>();
+        setDropShapeComponents([...dropShapeComponents]);
 
-
-            dropShapes.forEach(dropShape => {
-
-                const avaibleHeight = height - size.height;
-
-                const avaibleWidth = width - size.width;
-
-                while (true) {
-
-                    const randomX = Math.random() * avaibleWidth;
-
-                    const randomY = Math.random() * avaibleHeight;
-
-                    const coincidenceX: boolean = dropShapeCoordx.findIndex(
-                        coordx => randomX >= (coordx.x - size.width) && randomX <= (coordx.x + size.width)
-                    ) >= 0;
-
-                    const coincidenceY: boolean = dropShapeCoordx.findIndex(
-                        coordx => randomY >= (coordx.y - size.height) && randomY <= (coordx.y + size.height)
-                    ) >= 0;
-
-                    if (!(coincidenceX && coincidenceY)) {
-
-                        const randomCoordx = new Coordx(randomX, randomY);
-
-                        dropShapeCoordx.push(randomCoordx);
-                        
-
-                        const dropShapeComponent = <DropShape
-                            dropShape={dropShape}
-                            coordx={randomCoordx}
-                            size={size} id={crypto.randomUUID()} />
-
-                        dropShapeComponents.push(dropShapeComponent);
-
-                        break;
-                    }
-                }
-
-                setDropShapeComponents([...dropShapeComponents]);
-            });
-        }
     }, [workArea]);
 
     // Logic
@@ -79,6 +34,61 @@ function RandomShapeField({ dropShapes}: { dropShapes: Array<IDropShape>}) {
     };
 
     // Functions
+
+    function spawnRandomDropShapes() {
+
+        if (workArea.current == null) throw new Error("WorkArea должна быть не null.");
+
+        const { height, width } = workArea.current.getBoundingClientRect();
+
+        const size = new Size(76 * 1.12, 86 * 1.12);
+
+        const dropShapeCoordx = new Array<ICoordx>();
+
+
+        for (let dropShape of dropShapes) {
+
+            const avaibleHeight = height - size.height;
+
+            const avaibleWidth = width - size.width;
+
+            while (true) {
+
+                const randomX = Math.random() * avaibleWidth;
+
+                const randomY = Math.random() * avaibleHeight;
+
+                const coincidenceX: boolean = dropShapeCoordx.findIndex(
+                    coordx => randomX >= (coordx.x - size.width) && randomX <= (coordx.x + size.width)
+                ) >= 0;
+
+                const coincidenceY: boolean = dropShapeCoordx.findIndex(
+                    coordx => randomY >= (coordx.y - size.height) && randomY <= (coordx.y + size.height)
+                ) >= 0;
+
+                if (!(coincidenceX && coincidenceY)) {
+
+                    const randomCoordx = new Coordx(randomX, randomY);
+
+                    dropShapeCoordx.push(randomCoordx);
+
+
+                    const key = crypto.randomUUID();
+
+                    const dropShapeComponent = <DropShape
+                        dropShape={dropShape}
+                        coordx={randomCoordx}
+                        size={size} id={key} key={key} />
+
+                    dropShapeComponents.push(dropShapeComponent);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    // HTML element
 
     return (
         <div ref={workArea} style={style}>

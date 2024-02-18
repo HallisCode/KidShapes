@@ -14,20 +14,31 @@ import RandomShapeField from "./Fields/RandomShapeField.tsx";
 function ShapeGame() {
     // States
 
-    let [isRestart, setIsRestart] = useState(true);
+    const isRestart = useRef(true);
 
     const [dropShapes, setDropShapes] = useState(new Array<IDropShape>);
 
     const [dragShapesComponent, setDragShapeComponent] = useState(new Array<React.JSX.Element>);
 
+    // Logic
 
-    if (isRestart) {
+    if (isRestart.current) {
+        isRestart.current = false;
 
-        setIsRestart(false);
+        restartGame();
+    }
 
+
+    if (isRestart.current === false && dragShapesComponent.length === 0) {
+        // I don't know what to do this shit
+    }
+
+    // Functions
+
+    function restartGame() {
         setDropShapes([...GetDropShapes()]);
 
-        const dragShapesComponent = shuffle(GetDragShapes()).map(function (dragShape) {
+        const dragShapesComponent = shuffle([...GetDragShapes()]).map(function (dragShape) {
 
             const key = crypto.randomUUID();
 
@@ -36,13 +47,6 @@ function ShapeGame() {
 
         setDragShapeComponent([...dragShapesComponent]);
     }
-
-
-    // Logic
-
-    if (isRestart === false && dragShapesComponent.length === 0) setIsRestart(true);
-
-    // Functions
 
     function handleDragEnd(event: DragEndEvent) {
         // active - это перемещаемый объект
@@ -87,7 +91,7 @@ function ShapeGame() {
             <DndContext onDragEnd={handleDragEnd}>
 
                 <div className={styles.MainField}>
-                    <RandomShapeField dropShapes={dropShapes} />
+                    {<RandomShapeField dropShapes={dropShapes}/>}
                 </div>
 
                 <div className={styles.SelectorField}>
