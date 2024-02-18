@@ -1,49 +1,56 @@
 import React, { cloneElement, useRef, useState } from "react";
-import {DndContext, DragEndEvent} from '@dnd-kit/core';
+import { DndContext, DragEndEvent } from '@dnd-kit/core';
 
-import {GetDragShapes, GetDropShapes} from "../Data/GetShapes.ts";
-import {IDropShape, IShape} from "../Data/Shape.ts";
+import { GetDragShapes, GetDropShapes } from "../Data/GetShapes.ts";
+import { DropShape, IDropShape, IShape } from "../Data/Shape.ts";
 import shuffle from "../Utils/Shuffle.ts";
 
 import DragShape from "./Interactive-elements/DragShape.tsx";
-import DropShape from "./Interactive-elements/DropShape.tsx";
 
 
 import styles from "../css/game.module.css";
+import RandomShapeField from "./Fields/RandomShapeField.tsx";
+import ShapeType from "../Enums/ShapeType.ts";
 
-function ShapeGame()
-{
+function ShapeGame() {
     // States
+
+    const area = useRef(null);
 
     const [isRestart, setIsRestart] = useState(true);
 
-    const [dragShapeComponents, setDragShapeComponents] = useState(new Array<React.JSX.Element>);
+    const [dropShapes, setDropShapes] = useState(new Array<IDropShape>);
 
-    const [dropShapeComponents, setDropShapeComponents] = useState(new Array<React.JSX.Element>);
+    const [dragShapesComponent, setDragShapeComponent] = useState(new Array<React.JSX.Element>);
+
 
     // Logic
 
-    if (isRestart)
-    {
+    if (isRestart) {
+
         setIsRestart(false);
 
-        setDropShapeComponents(GetDropShapes().map(
-            dropShape => <DropShape dropShape={dropShape} id={crypto.randomUUID()}/>
-        ));
 
-        setDragShapeComponents(shuffle(GetDragShapes()).map(
-            (shape, key) => <DragShape shape={shape} id={crypto.randomUUID()}/>
-        ));
-        
+        setDropShapes([...GetDropShapes()]);
+
+        const dragShapesComponent = shuffle(GetDragShapes()).map(function (dragShape) {
+
+            const key = crypto.randomUUID();
+
+            return <DragShape shape={dragShape} id={key} key={key} />
+        });
+
+        setDragShapeComponent([...dragShapesComponent]);
     }
+
+    if (isRestart === false && dragShapesComponent.length === 0) setIsRestart(true);
 
     // Functions
 
-    function handleDragEnd(event : DragEndEvent) 
-    {
+    function handleDragEnd(event: DragEndEvent) {
         // active - это перемещаемый объект
         // over - это объект над которым передвигают объект active
-        const {active, over} = event;
+        const { active, over } = event;
 
         if (over === null) return;
 
@@ -55,34 +62,22 @@ function ShapeGame()
         if (dropShape == null || dragShape == null) return;
 
 
-        if (dropShape.type === dragShape.type)
-        {
-            const indexDropComponent = dropShapeComponents.findIndex(
-                dropShape => dropShape.props.id === over.id
+        if (dropShape.type === dragShape.type) {
+
+            const indexDragComponent = dragShapesComponent.findIndex(dragShape => dragShape.key === active.id)
+
+            if (indexDragComponent < 0) throw new Error(
+                `DragShapesComponent с указанным id ${active.id} не найден.`
             );
 
-            const indexDragComponent = dragShapeComponents.findIndex(
-                dragShape => dragShape.props.id === active.id
-            );
+            dropShape.innerElement = dragShapesComponent[indexDragComponent];
 
-            if (indexDropComponent < 0 || indexDragComponent < 0) 
-            {
-                throw new Error("IndexDropComponent или indexDragComponent не найдены.")
-            }
+            dragShapesComponent.splice(indexDragComponent, 1);
 
 
-            dropShape.innerElement = dragShapeComponents[indexDragComponent];
+            setDropShapes([...dropShapes]);
 
-            dropShapeComponents[indexDropComponent] = cloneElement(
-                dropShapeComponents[indexDropComponent], {dropShape : dropShape}
-            );
-
-            dragShapeComponents.splice(indexDragComponent, 1);
-
-
-            setDropShapeComponents([...dropShapeComponents]);
-
-            setDragShapeComponents([...dragShapeComponents]);
+            setDragShapeComponent([...dragShapesComponent]);
 
         }
 
@@ -93,15 +88,18 @@ function ShapeGame()
     return (
         <div className={styles.ShapeGame}>
             <DndContext onDragEnd={handleDragEnd}>
-                <div className={styles.MainField}>
-                    {dropShapeComponents}
+
+                <div ref={area} className={styles.MainField}>
+                    <RandomShapeField dropShapes={dropShapes} />
                 </div>
+
                 <div className={styles.SelectorField}>
-                    {dragShapeComponents}
+                    {dragShapesComponent}
                 </div>
+
             </DndContext>
         </div>
-    ); 
+    );
 }
 
 export default ShapeGame;

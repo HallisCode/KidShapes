@@ -1,4 +1,4 @@
-import { IShape, DragShape, DropShape, IDropShape } from "../Data/Shape.ts";
+import { IShape, DragShape, DropShape, IDropShape} from "../Data/Shape.ts";
 import ShapeType from "../Enums/ShapeType.ts";
 
 import square from "../svg/square.svg";
@@ -30,19 +30,19 @@ function GetDragShapes() : Array<IShape>
 {
     const shapes: Array<IShape> = new Array<IShape>;
 
-    shapes.push(new DragShape(styles.Shape, ShapeType.square, square));
+    shapes.push(new DragShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.square, square));
 
-    shapes.push(new DragShape(styles.Shape, ShapeType.circle, circle));
+    shapes.push(new DragShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.circle, circle));
 
-    shapes.push(new DragShape(styles.Shape, ShapeType.triangle, triangle));
+    shapes.push(new DragShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.triangle, triangle));
 
-    shapes.push(new DragShape(styles.Shape, ShapeType.parallelogram, parallelogram));
+    shapes.push(new DragShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.parallelogram, parallelogram));
 
-    shapes.push(new DragShape(styles.Shape, ShapeType.rectangle, rectangle));
+    shapes.push(new DragShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.rectangle, rectangle));
 
-    shapes.push(new DragShape(styles.Shape, ShapeType.star, star));
+    shapes.push(new DragShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.star, star));
 
-    shapes.push(new DragShape(styles.Shape, ShapeType.rhombus, rhombus));
+    shapes.push(new DragShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.rhombus, rhombus));
 
     return shapes;
 }
@@ -51,19 +51,19 @@ function GetDropShapes() : Array<IDropShape>
 {
     const shapes: Array<IDropShape> = new Array<IDropShape>;
 
-    shapes.push(new DropShape(styles.DropShape, ShapeType.square, square_drop));
+    shapes.push(new DropShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.square, square_drop));
 
-    shapes.push(new DropShape(styles.DropShape, ShapeType.circle, circle_drop));
+    shapes.push(new DropShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.circle, circle_drop));
 
-    shapes.push(new DropShape(styles.DropShape, ShapeType.triangle, triangle_drop));
+    shapes.push(new DropShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.triangle, triangle_drop));
 
-    shapes.push(new DropShape(styles.DropShape, ShapeType.parallelogram, parallelogram_drop));
+    shapes.push(new DropShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.parallelogram, parallelogram_drop));
 
-    shapes.push(new DropShape(styles.DropShape, ShapeType.rectangle, rectangle_drop));
+    shapes.push(new DropShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.rectangle, rectangle_drop));
 
-    shapes.push(new DropShape(styles.DropShape, ShapeType.star, star_drop));
+    shapes.push(new DropShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.star, star_drop));
 
-    shapes.push(new DropShape(styles.DropShape, ShapeType.rhombus, rhombus_drop));
+    shapes.push(new DropShape(`${styles.Shape} ${styles.AllInnerElementFill}`, ShapeType.rhombus, rhombus_drop));
 
     return shapes;
 }

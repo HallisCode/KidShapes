@@ -13,7 +13,6 @@ interface IDropShape extends IShape
     innerElement? : React.JSX.Element
 }
 
-
 class DragShape implements IShape
 {
     className: string;
@@ -36,9 +35,9 @@ class DropShape implements IDropShape
     className: string;
     type: ShapeType;
     svg?: string;
-    innerElement?: React.JSX.Element;
+    innerElement? : React.JSX.Element;
 
-    constructor(className : string, type : ShapeType, svg? : string, innerElement?: React.JSX.Element)
+    constructor(className : string, type : ShapeType, svg? : string, innerElement? : React.JSX.Element)
     {
         this.className = className;
 
@@ -47,6 +46,7 @@ class DropShape implements IDropShape
         this.svg = svg;
 
         this.innerElement = innerElement;
+
     }
 
 }

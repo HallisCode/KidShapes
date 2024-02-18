@@ -1,6 +1,7 @@
 .ShapeGame 
 {
-    --shape-size : 75px;
+    --shape-height-size : 76px;
+    --shape-width-size : 86px;
 }
 
 .ShapeGame
@@ -8,19 +9,26 @@
     height: 100%;
     width: 100%;
     border: 2px #c8c8c8 solid;
+
     display: flex;
     flex-direction: column;
 }
 
+
 .MainField
 {
+    overflow: hidden;
+
     flex: 1;
+
+    padding: 15px;
 }
 
 .SelectorField
 {
-    flex: 0.15;
     border-top: 2px #c8c8c8 solid;
+
+    flex: 0.15;
 
     display: flex;
     flex-direction: row;
@@ -28,21 +36,24 @@
     align-items: center;
 }
 
+
 .Shape 
 {
-    height: var(--shape-size);
-    width: var(--shape-size);
+    height: var(--shape-height-size);
+    width: var(--shape-width-size);
 
     display: flex;
     align-items: center;
 }
 
-.DropShape 
-{
-    height: var(--shape-size);
-    width: var(--shape-size);
-    transform: scale(1.12, 1.12);
 
-    display: flex;
-    align-items: center;
+.AllInnerElementFill
+{
+    
+}
+
+.AllInnerElementFill *
+{
+    height: inherit;
+    width: inherit;
 }
