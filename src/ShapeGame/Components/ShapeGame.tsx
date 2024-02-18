@@ -1,8 +1,8 @@
-import React, { cloneElement, useRef, useState } from "react";
+import React, {  useRef, useState } from "react";
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 
 import { GetDragShapes, GetDropShapes } from "../Data/GetShapes.ts";
-import { DropShape, IDropShape, IShape } from "../Data/Shape.ts";
+import { IDropShape, IShape } from "../Data/Shape.ts";
 import shuffle from "../Utils/Shuffle.ts";
 
 import DragShape from "./Interactive-elements/DragShape.tsx";
@@ -10,7 +10,6 @@ import DragShape from "./Interactive-elements/DragShape.tsx";
 
 import styles from "../css/game.module.css";
 import RandomShapeField from "./Fields/RandomShapeField.tsx";
-import ShapeType from "../Enums/ShapeType.ts";
 
 function ShapeGame() {
     // States
