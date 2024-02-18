@@ -8,7 +8,7 @@ import { Coordx, ICoordx } from "../../Data/Coordx.ts";
 import styles from "../../css/game.module.css";
 
 
-function RandomShapeField({ dropShapes }: { dropShapes: Array<IDropShape> }) {
+function RandomShapeField({ dropShapes}: { dropShapes: Array<IDropShape>}) {
 
     // Hooks
 

@@ -1,4 +1,4 @@
-import React, {  useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 
 import { GetDragShapes, GetDropShapes } from "../Data/GetShapes.ts";
@@ -14,21 +14,16 @@ import RandomShapeField from "./Fields/RandomShapeField.tsx";
 function ShapeGame() {
     // States
 
-    const area = useRef(null);
-
-    const [isRestart, setIsRestart] = useState(true);
+    let [isRestart, setIsRestart] = useState(true);
 
     const [dropShapes, setDropShapes] = useState(new Array<IDropShape>);
 
     const [dragShapesComponent, setDragShapeComponent] = useState(new Array<React.JSX.Element>);
 
 
-    // Logic
-
     if (isRestart) {
 
         setIsRestart(false);
-
 
         setDropShapes([...GetDropShapes()]);
 
@@ -41,6 +36,9 @@ function ShapeGame() {
 
         setDragShapeComponent([...dragShapesComponent]);
     }
+
+
+    // Logic
 
     if (isRestart === false && dragShapesComponent.length === 0) setIsRestart(true);
 
@@ -88,7 +86,7 @@ function ShapeGame() {
         <div className={styles.ShapeGame}>
             <DndContext onDragEnd={handleDragEnd}>
 
-                <div ref={area} className={styles.MainField}>
+                <div className={styles.MainField}>
                     <RandomShapeField dropShapes={dropShapes} />
                 </div>
 
