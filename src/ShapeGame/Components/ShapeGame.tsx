@@ -14,28 +14,32 @@ import RandomShapeField from "./Fields/RandomShapeField.tsx";
 function ShapeGame() {
     // States
 
-    const isRestart = useRef(true);
+    const [isRestart, setIsRestart] = useState(true);
 
-    const [dropShapes, setDropShapes] = useState(new Array<IDropShape>);
+    const [dropShapes, setDropShapes] = useState(GetDropShapes());
 
     const [dragShapesComponent, setDragShapeComponent] = useState(new Array<React.JSX.Element>);
 
+    useEffect(() => {
+        if (isRestart) {
+
+            restartGame();
+
+            setIsRestart(false);
+        }
+    }, [isRestart]);
+
     // Logic
 
-    if (isRestart.current) {
-        isRestart.current = false;
+    if (isRestart === false && dragShapesComponent.length === 0) {
 
-        restartGame();
-    }
-
-
-    if (isRestart.current === false && dragShapesComponent.length === 0) {
-        // I don't know what to do this shit
+        setIsRestart(true);
     }
 
     // Functions
 
     function restartGame() {
+
         setDropShapes([...GetDropShapes()]);
 
         const dragShapesComponent = shuffle([...GetDragShapes()]).map(function (dragShape) {
@@ -79,9 +83,7 @@ function ShapeGame() {
             setDropShapes([...dropShapes]);
 
             setDragShapeComponent([...dragShapesComponent]);
-
         }
-
     }
 
     // HTML element
@@ -91,7 +93,7 @@ function ShapeGame() {
             <DndContext onDragEnd={handleDragEnd}>
 
                 <div className={styles.MainField}>
-                    {<RandomShapeField dropShapes={dropShapes}/>}
+                    {<RandomShapeField dropShapes={dropShapes} isRestart={isRestart} />}
                 </div>
 
                 <div className={styles.SelectorField}>

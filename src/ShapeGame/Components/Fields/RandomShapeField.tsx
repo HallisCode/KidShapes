@@ -6,25 +6,28 @@ import { Size } from "../../Data/Size.ts";
 import { Coordx, ICoordx } from "../../Data/Coordx.ts";
 
 
-function RandomShapeField({ dropShapes}: { dropShapes: Array<IDropShape>}) {
+function RandomShapeField({ dropShapes, isRestart}: { dropShapes: Array<IDropShape>, isRestart : boolean}) {
 
     // Hooks
 
     const workArea = useRef<HTMLDivElement>(null);
 
-    const [dropShapeComponents, setDropShapeComponents] = useState(new Array<React.JSX.Element>);
+    let [dropShapeComponents, setDropShapeComponents] = useState(new Array<React.JSX.Element>());
 
     useEffect(() => {
 
-        if (workArea.current == null) return;
+        if (workArea.current == null || !isRestart) return;
+
+        dropShapeComponents = new Array<React.JSX.Element>();
 
         spawnRandomDropShapes();
 
-        setDropShapeComponents([...dropShapeComponents]);
-
-    }, [workArea]);
+    }, [workArea, isRestart]);
 
     // Logic
+
+    console.log(isRestart);
+    console.log("randomed called");
 
     const style: React.CSSProperties =
     {
@@ -86,6 +89,8 @@ function RandomShapeField({ dropShapes}: { dropShapes: Array<IDropShape>}) {
                 }
             }
         }
+
+        setDropShapeComponents([...dropShapeComponents]);
     }
 
     // HTML element
