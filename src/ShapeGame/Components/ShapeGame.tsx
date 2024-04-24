@@ -18,7 +18,7 @@ function ShapeGame() {
 
     const [wins, setWins] = useState(0);
 
-    const [isWinpopup, setWinpopupActive] = useState(true);
+    const [isWinpopup, setWinpopupActive] = useState(false);
 
     const [isRestart, setIsRestart] = useState(true);
 
