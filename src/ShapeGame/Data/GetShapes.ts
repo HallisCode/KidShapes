@@ -1,5 +1,5 @@
-import { IShape, DragShape, DropShape, IDropShape} from "../Data/Shape.ts";
-import ShapeType from "../Enums/ShapeType.ts";
+import { IShape, DragShape, DropShape, IDropShape} from "../Data/Shape";
+import ShapeType from "../Enums/ShapeType";
 
 import square from "../svg/square.svg";
 import square_drop from "../svg/square-drop.svg";

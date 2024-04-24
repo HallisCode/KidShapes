@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { DndContext, DragEndEvent, closestCenter } from '@dnd-kit/core';
 
-import { GetDragShapes, GetDropShapes } from "../Data/GetShapes.ts";
-import { IDropShape, IShape } from "../Data/Shape.ts";
-import shuffle from "../Utils/Shuffle.ts";
+import { GetDragShapes, GetDropShapes } from "../Data/GetShapes";
+import { IDropShape, IShape } from "../Data/Shape";
+import shuffle from "../Utils/Shuffle";
 
-import DragShape from "./Interactive-elements/DragShape.tsx";
+import DragShape from "./Interactive-elements/DragShape";
 
 
 import styles from "../css/game.module.css";
-import RandomShapeField from "./Fields/RandomShapeField.tsx";
+import RandomShapeField from "./Fields/RandomShapeField";
+import centrToCentr from "../Utils/centrToCentrAlgorithm";
 
 function ShapeGame() {
     // States
@@ -90,7 +91,7 @@ function ShapeGame() {
 
     return (
         <div className={styles.ShapeGame}>
-            <DndContext onDragEnd={handleDragEnd}>
+            <DndContext onDragEnd={handleDragEnd} collisionDetection={centrToCentr}>
 
                 <div className={styles.MainField}>
                     {<RandomShapeField dropShapes={dropShapes} isRestart={isRestart} />}

@@ -1,5 +1,5 @@
 import React, { JSX } from "react";
-import ShapeType from "../Enums/ShapeType.ts";
+import ShapeType from "../Enums/ShapeType";
 
 interface IShape
 {
@@ -51,4 +51,4 @@ class DropShape implements IDropShape
 
 }
 
-export {IShape, IDropShape, DragShape, DropShape};
+export {type IShape, type IDropShape, DragShape, DropShape};

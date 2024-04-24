@@ -2,7 +2,7 @@ import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 
-import { IShape } from "../../Data/Shape.ts";
+import { IShape } from "../../Data/Shape";
 
 function DragShape({ shape, id}: { shape: IShape, id: string | number}) {
 

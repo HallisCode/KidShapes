@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { IDropShape } from "../../Data/Shape.ts";
-import DropShape from "../Interactive-elements/DropShape.tsx";
-import { Size } from "../../Data/Size.ts";
-import { Coordx, ICoordx } from "../../Data/Coordx.ts";
+import { IDropShape } from "../../Data/Shape";
+import DropShape from "../Interactive-elements/DropShape";
+import { Size } from "../../Data/Size";
+import { Coordx, ICoordx } from "../../Data/Coordx";
 
 
 function RandomShapeField({ dropShapes, isRestart}: { dropShapes: Array<IDropShape>, isRestart : boolean}) {

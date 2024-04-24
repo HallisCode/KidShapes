@@ -19,4 +19,4 @@ class Size implements ISize
 
 }
 
-export {ISize, Size};
+export {type ISize, Size};

@@ -1,9 +1,9 @@
 import React from "react";
 import { useDroppable } from "@dnd-kit/core";
 
-import { IDropShape } from "../../Data/Shape.ts";
-import { Coordx, ICoordx } from "../../Data/Coordx.ts";
-import { ISize } from "../../Data/Size.ts";
+import { IDropShape } from "../../Data/Shape";
+import { Coordx, ICoordx } from "../../Data/Coordx";
+import { ISize } from "../../Data/Size";
 
 
 function DropShape({ dropShape, coordx = new Coordx(0, 0), size, id }: {

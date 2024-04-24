@@ -19,4 +19,4 @@ class Coordx implements ICoordx
 
 }
 
-export {ICoordx, Coordx};
+export {type ICoordx, Coordx};

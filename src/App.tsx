@@ -1,6 +1,6 @@
 import React from "react";
 
-import ShapeGame from "./ShapeGame/Components/ShapeGame.tsx";
+import ShapeGame from "./ShapeGame/Components/ShapeGame";
 
 
 import styles from "./css/index.module.css";
