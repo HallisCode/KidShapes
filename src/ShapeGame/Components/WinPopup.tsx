@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import photo1 from "../images/1.jpg";
-import photo2 from "../images/1.jpg";
-import photo3 from "../images/1.jpg";
+import photo2 from "../images/2.jpg";
+import photo3 from "../images/3.jpg";
 
 import styles from "../css/game.module.css";
 
