@@ -4,6 +4,11 @@
     --shape-width-size : 86px;
 }
 
+.Wrapper {
+    height: 100%;
+    width: 100%;
+}
+
 .ShapeGame
 {
     height: 100%;
@@ -56,4 +61,38 @@
 {
     height: inherit;
     width: inherit;
+}
+
+.Winpopup_wrapper 
+{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(0,0,0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000000000;
+    transition: 0.5;
+    pointer-events: none;
+
+}
+
+.Winpopup
+{
+    padding: 20px;
+    border-radius: 12px;
+    background-color: white;
+    pointer-events: all;
+    height: 50vh;
+    width: 50vw;
+}
+
+.WinImage
+{
+    height: 100%;
+    width: 100%;
+
 }

@@ -11,9 +11,14 @@ import DragShape from "./Interactive-elements/DragShape";
 import styles from "../css/game.module.css";
 import RandomShapeField from "./Fields/RandomShapeField";
 import centrToCentr from "../Utils/centrToCentrAlgorithm";
+import WinPopup from "./WinPopup";
 
 function ShapeGame() {
     // States
+
+    const [wins, setWins] = useState(0);
+
+    const [isWinpopup, setWinpopupActive] = useState(true);
 
     const [isRestart, setIsRestart] = useState(true);
 
@@ -33,6 +38,12 @@ function ShapeGame() {
     // Logic
 
     if (isRestart === false && dragShapesComponent.length === 0) {
+
+        const t : number = wins + 1;
+
+        setWins(t);
+
+        if (t % 3 == 0) setWinpopupActive(true);
 
         setIsRestart(true);
     }
@@ -72,9 +83,10 @@ function ShapeGame() {
 
             const indexDragComponent = dragShapesComponent.findIndex(dragShape => dragShape.key === active.id)
 
-            if (indexDragComponent < 0) throw new Error(
-                `DragShapesComponent с указанным id ${active.id} не найден.`
-            );
+            // if (indexDragComponent < 0) throw new Error(
+            //     `DragShapesComponent с указанным id ${active.id} не найден.`
+            // );
+            if (indexDragComponent < 0) return;
 
             dropShape.innerElement = dragShapesComponent[indexDragComponent];
 
@@ -90,19 +102,24 @@ function ShapeGame() {
     // HTML element
 
     return (
-        <div className={styles.ShapeGame}>
-            <DndContext onDragEnd={handleDragEnd} collisionDetection={centrToCentr}>
+        <div className={styles.Wrapper}>
+            <WinPopup active={isWinpopup} setActive={setWinpopupActive}/>
+            <div className={styles.ShapeGame}>
+                <DndContext onDragEnd={handleDragEnd}>
 
-                <div className={styles.MainField}>
-                    {<RandomShapeField dropShapes={dropShapes} isRestart={isRestart} />}
-                </div>
+                    <div className={styles.MainField}>
+                        {<RandomShapeField dropShapes={dropShapes} isRestart={isRestart} />}
+                    </div>
 
-                <div className={styles.SelectorField}>
-                    {dragShapesComponent}
-                </div>
+                    <div className={styles.SelectorField}>
+                        {dragShapesComponent}
+                    </div>
 
-            </DndContext>
+                </DndContext>
+
+            </div>
         </div>
+
     );
 }
 
