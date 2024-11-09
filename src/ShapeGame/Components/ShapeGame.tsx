@@ -43,7 +43,7 @@ function ShapeGame() {
 
         setWins(t);
 
-        if (t % 3 == 0) setWinpopupActive(true);
+        if (t % 2 == 0) setWinpopupActive(true);
 
         setIsRestart(true);
     }
