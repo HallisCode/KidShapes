@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import photo1 from "../images/1.jpg";
 import photo2 from "../images/2.jpg";
 import photo3 from "../images/3.jpg";
+import photo4 from "../images/4.jpg";
+import photo5 from "../images/5.jpg";
 
 import styles from "../css/game.module.css";
 
@@ -13,7 +15,9 @@ function randomIntFromInterval(min : number, max : number) { // min and max incl
 const gifts : Array<string> = [
     photo1,
     photo2,
-    photo3
+    photo3,
+    photo4,
+    photo5,
 ];
 
 function WinPopup({ active, setActive }: { active: boolean, setActive: React.Dispatch<React.SetStateAction<boolean>> }) {
